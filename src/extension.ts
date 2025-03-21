@@ -25,11 +25,18 @@ export function activate(context: vscode.ExtensionContext) {
 		  return {
 			onWillReceiveMessage: m => {
 				const config = vscode.workspace.getConfiguration("remedybg-breakpoint-integration");
+				const enabled = config.get<boolean>("enabled", false);
+
+				if(!enabled)
+				{
+					return;
+				}
+
 				const launchConfigs = config.get<string[]>("launchConfigurations", []);
 				
-				if (launchConfigs.length > 0 && !launchConfigs.includes(vscode.debug.activeDebugSession?.name || ""))
+				if (launchConfigs.length > 0 && !launchConfigs.includes((vscode.debug.activeDebugSession as vscode.DebugSession).name))
 				{
-					return
+					return;
 				}
 
 				if (m.command == "disconnect")

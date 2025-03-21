@@ -17,6 +17,10 @@
     "configuration": {
       "title": "RemedyBG Breakpoint Integration",
       "properties": {
+        "remedybg-breakpoint-integration.enabled": {
+          "type": "boolean",
+          "default": true
+        },
         "remedybg-breakpoint-integration.launchConfigurations": {
           "type": "array",
           "default": [],
